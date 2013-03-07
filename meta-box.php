@@ -386,4 +386,15 @@ function mytheme_head(){
 }
 add_action('admin_head','mytheme_head');
 add_action('wp_head','mytheme_head');
+
+/**
+ * Template tag
+ */
+function fontawesome_icon(){
+	 $icon = get_post_meta($post->ID, 'wcm_icon', true); ?>
+		 
+	<?php if($icon):?> 
+			 <i class="<?php echo get_post_meta($post->ID, 'wcm_icon', true);?> icon-large"></i> 			
+	<?php endif;
+}
 ?>
