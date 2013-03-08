@@ -15,14 +15,14 @@ License: GPL
 
 //don't conflict with other plugins
 $prefix = 'wcm_';
-
+$post_types = array('post', 'page');
 //set up the box and teh fields inside
 $meta_box = array(
 	'id' => 'icon-meta-box',
 	'title' => 'Font Awesome Icon', //title of box
-	'page' => 'post', //what type of post will this appear on. accepts custom post types
-	'context' => 'side', //normal, advanced or side
 	
+	'context' => 'side', //normal, advanced or side
+	'priority' => 'default',
 	'fields' => array(  //and now for the custom fields in the box
 		
 		array(
@@ -289,8 +289,11 @@ add_action('admin_menu', 'mytheme_add_box');
 // Add meta box
 function mytheme_add_box() {
 	global $meta_box;
-	
-	add_meta_box($meta_box['id'], $meta_box['title'], 'mytheme_show_box', $meta_box['page'], $meta_box['context'], $meta_box['priority']);
+	global $post_types;
+	foreach($post_types as $type){
+	//(id, title, callback, post type, context, priority, callback args)
+	add_meta_box($meta_box['id'], $meta_box['title'], 'mytheme_show_box', $type, $meta_box['context'], $meta_box['priority']);
+}
 }
 
 // Callback function to show fields in meta box
@@ -387,14 +390,11 @@ function mytheme_head(){
 add_action('admin_head','mytheme_head');
 add_action('wp_head','mytheme_head');
 
-/**
- * Template tag
- */
+//theme template tag
 function fontawesome_icon(){
-	 $icon = get_post_meta($post->ID, 'wcm_icon', true); ?>
-		 
-	<?php if($icon):?> 
-			 <i class="<?php echo get_post_meta($post->ID, 'wcm_icon', true);?> icon-large"></i> 			
-	<?php endif;
+	global $post;
+	$icon = get_post_meta($post->ID, 'wcm_icon', true); ?>
+<?php if($icon):?>
+<i class="<?php echo get_post_meta($post->ID, 'wcm_icon', true);?> icon-large"></i>
+<?php endif;
 }
-?>
