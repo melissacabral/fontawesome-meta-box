@@ -2,8 +2,8 @@
 Contributors: melissacabral
 Tags: icon, fontawesome, metabox
 Requires at least: 3.0
-Tested up to: 3.5
-Stable tag: 1.0
+Tested up to: 3.9
+Stable tag: 2.0
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -30,6 +30,8 @@ Adds a metabox to posts to associate a single font-awesome icon (Useful in place
 = 1.0 =
 * Base functionality established. Dropdown with visual feedback, DB sanitization, rough display function
 
+= 2.0 = 
+* upgraded to fontawesome 4.1.0
 
 == Upgrade Notice ==
 
